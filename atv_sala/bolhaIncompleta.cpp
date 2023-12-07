@@ -25,13 +25,37 @@ void bolha(int n, int *v)
 	}
 }
 
-// void PesquisaBinaria(int n, int *v, int procurado)
-// {
-// }
+int pesquisaBinaria(int n, int *v, int x)
+{
+	int p = 0;
+	int u = n - 1;
+
+	while (p <= u)
+	{
+		// Calcula o meio
+		int m = (p + u) / 2;
+
+		// se for igual ao meio ja retorna logo como true
+		if (x == v[m])
+		{
+			return 1;
+		}
+
+		// Se não, define o novo fim caso o procurado seja menor q o meio, ou o contrário.
+		if (x < v[m])
+			u = m - 1;
+		else
+			p = m + 1;
+	}
+
+	return 0;
+}
 
 main()
 {
 	int v[LEN];
+	int procurado;
+
 	for (int i = 0; i < LEN; i = i + 1)
 	{
 		printf("Digite o valor %d :", i);
@@ -56,7 +80,12 @@ main()
 
 	printf("\n");
 
+	procurado = pesquisaBinaria(LEN, v, 3);
 
+	if (procurado)
+		printf("Existe no vetor");
+	else
+		printf("Nao existe");
 
 	// #ordene o vetor V usando o m�todo da bolha
 	// #mostre o vetor ordenado
